@@ -1,0 +1,21 @@
+name: Generate News Audio
+
+on:
+  schedule:
+    # Runs every 2 minutes
+    - cron: "*/2 * * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call API
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.API_KEY }}" \
+            -H "Content-Type: application/json" \
+            "${{ secrets.API_URL_GENERATE_AUDIO }}"
+        env:
+          API_URL_GENERATE_AUDIO: ${{ secrets.API_URL_GENERATE_AUDIO }}
+          API_KEY: ${{ secrets.API_KEY }}

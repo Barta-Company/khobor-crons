@@ -1,0 +1,21 @@
+name: Fetch and Save News
+
+on:
+  schedule:
+    # Runs every 15 minutes
+    - cron: "*/15 * * * *"
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call API
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.API_KEY }}" \
+            -H "Content-Type: application/json" \
+            "${{ secrets.API_URL_FETCH_NEWS }}"
+        env:
+          API_URL_FETCH_NEWS: ${{ secrets.API_URL_FETCH_NEWS }}
+          API_KEY: ${{ secrets.API_KEY }}
