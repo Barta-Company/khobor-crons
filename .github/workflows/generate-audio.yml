@@ -3,6 +3,10 @@ name: Generate News Audio
 on:
   schedule:
     - cron: "*/2 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   call-api:

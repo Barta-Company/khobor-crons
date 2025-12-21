@@ -3,6 +3,10 @@ name: Fetch and Save News
 on:
   schedule:
     - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   call-api:
